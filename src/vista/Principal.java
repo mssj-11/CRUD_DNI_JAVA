@@ -56,6 +56,11 @@ public class Principal extends javax.swing.JFrame {
         PanelOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Operaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 0))); // NOI18N
 
         BtnNuevo.setText("Nuevo");
+        BtnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNuevoActionPerformed(evt);
+            }
+        });
 
         BtnAgregar.setText("Agregar");
         BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +70,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         BtnEliminar.setText("Eliminar");
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
 
         BtnModificar.setText("Modificar");
         BtnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -272,6 +282,18 @@ public class Principal extends javax.swing.JFrame {
         listar();
     }//GEN-LAST:event_BtnModificarActionPerformed
 
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        // Llamar Eliminar y Listar
+        Eliminar();
+        listar();
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void BtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoActionPerformed
+        // Llamar Nuevo y Listar
+        Nuevo();
+        listar();
+    }//GEN-LAST:event_BtnNuevoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -337,6 +359,16 @@ public class Principal extends javax.swing.JFrame {
     }
     
     
+    //  Metodo Limpiar Tabla
+    public void LimpiarTabla(){
+        for(int i=0; i<=TablaDatos.getRowCount(); i++){
+            model.removeRow(i);
+            i=-1;
+        }
+    }
+    
+    
+    
     //  Metodo Agregar
     public void Agregar(){
         String dni = InputDni.getText();
@@ -357,14 +389,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     
-    
-    //  Metodo Limpiar Tabla
-    public void LimpiarTabla(){
-        for(int i=0; i<=TablaDatos.getRowCount(); i++){
-            model.removeRow(i);
-            i=-1;
-        }
-    }
     
     
     //  Metodo Modificar
@@ -387,6 +411,33 @@ public class Principal extends javax.swing.JFrame {
             } catch (Exception e) {
             }
         }
+    }
+    
+    
+    
+    //  Metodo Eliminar
+    public void Eliminar(){
+        int selected = TablaDatos.getSelectedRow();
+        
+        if(selected == -1){
+            JOptionPane.showConfirmDialog(null, "Debe seleccionar una fila");
+        }else{
+            String sql = "DELETE FROM persona WHERE id='"+id+"'";
+            try {
+                cn = conn.getConnection();
+                st = cn.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    
+    
+    //  Metodo Nuevo
+    public void Nuevo(){
+        InputId.setText("");
     }
     
     
