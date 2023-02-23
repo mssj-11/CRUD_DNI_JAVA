@@ -257,6 +257,7 @@ public class Principal extends javax.swing.JFrame {
         //  Llamar Metodo Agregar y Listar
         Agregar();
         listar();
+        Nuevo();
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void TablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDatosMouseClicked
@@ -280,18 +281,19 @@ public class Principal extends javax.swing.JFrame {
         // Llamar Modificar y Listar
         Modificar();
         listar();
+        Nuevo();
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
         // Llamar Eliminar y Listar
         Eliminar();
         listar();
+        Nuevo();
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoActionPerformed
         // Llamar Nuevo y Listar
         Nuevo();
-        listar();
     }//GEN-LAST:event_BtnNuevoActionPerformed
 
     /**
@@ -428,6 +430,7 @@ public class Principal extends javax.swing.JFrame {
                 st = cn.createStatement();
                 st.executeUpdate(sql);
                 JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
+                LimpiarTabla();
             } catch (Exception e) {
             }
         }
@@ -437,7 +440,11 @@ public class Principal extends javax.swing.JFrame {
     
     //  Metodo Nuevo
     public void Nuevo(){
+        //  Pasar los campo a vacios en los Inputs
         InputId.setText("");
+        InputDni.setText("");
+        InputNombre.setText("");
+        InputDni.requestFocus();
     }
     
     
